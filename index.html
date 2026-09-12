@@ -527,6 +527,117 @@ header{
 .buy-note b{ color:#ffc857; }
 
 /* ============================================================
+   CLICKABLE STEPS
+   ============================================================ */
+.step{
+  display:block;
+  width:100%;
+  text-align:left;
+  font-family: inherit;
+  color: inherit;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.step:hover{ border-color: rgba(69,227,106,.45); }
+.step:active{ transform: translateY(-2px) scale(.985); }
+.step:focus-visible{ outline: 2px solid var(--green); outline-offset: 3px; }
+
+.step-title{
+  display:block;
+  font-family: var(--font-display);
+  font-size:1rem; font-weight:700;
+  margin: 6px 0 8px; letter-spacing:-.01em;
+}
+.step-text{
+  display:block;
+  color: var(--muted);
+  font-size:.86rem; line-height:1.55;
+}
+.step-cta{
+  display:flex; align-items:center; gap:6px;
+  margin-top:14px;
+  font-size:.7rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase;
+  color: var(--green);
+  opacity:.7; transition:.25s;
+}
+.step:hover .step-cta{ opacity:1; gap:10px; }
+.step-cta .arrow{ transition: transform .25s; }
+.step:hover .step-cta .arrow{ transform: translateX(4px); }
+.step-cta.wait{ color:#ffc857; }
+
+/* ============================================================
+   WALLET MODAL
+   ============================================================ */
+.modal-overlay{
+  position: fixed; inset:0; z-index: 300;
+  display:flex; align-items:center; justify-content:center;
+  padding: 22px;
+  background: rgba(2,5,3,.78);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  opacity:0; visibility:hidden;
+  transition: opacity .3s ease, visibility .3s;
+}
+.modal-overlay.open{ opacity:1; visibility:visible; }
+
+.modal{
+  position:relative;
+  width:100%; max-width: 460px;
+  background: linear-gradient(160deg, var(--panel-2), var(--bg-2));
+  border:1px solid rgba(69,227,106,.3);
+  border-radius: var(--radius-lg);
+  padding: 34px 28px 28px;
+  box-shadow: 0 40px 90px -30px rgba(0,0,0,.9), 0 0 70px -30px var(--green-glow);
+  transform: translateY(18px) scale(.96);
+  transition: transform .35s cubic-bezier(.16,1,.3,1);
+}
+.modal-overlay.open .modal{ transform: none; }
+
+.modal h3{ font-size:1.4rem; font-weight:800; letter-spacing:-.02em; margin-bottom:10px; }
+.modal > p{ color: var(--muted); font-size:.9rem; margin-bottom:22px; }
+
+.modal-close{
+  position:absolute; top:14px; right:14px;
+  width:34px; height:34px; border-radius:10px;
+  display:grid; place-items:center;
+  background: rgba(255,255,255,.05);
+  border:1px solid var(--line-soft);
+  color: var(--muted); font-size:.9rem; cursor:pointer;
+  transition:.22s;
+}
+.modal-close:hover{ background: rgba(255,90,90,.12); color:#ff7b7b; border-color: rgba(255,90,90,.3); }
+
+.wallet-list{ display:grid; gap:10px; }
+.wallet-item{
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  padding: 15px 18px;
+  background: rgba(255,255,255,.03);
+  border:1px solid var(--line-soft);
+  border-radius: 13px;
+  text-decoration:none; color: var(--text);
+  font-weight:600; font-size:.95rem;
+  transition:.25s;
+}
+.wallet-item span{
+  font-size:.66rem; letter-spacing:.1em; text-transform:uppercase;
+  color: var(--muted-2); font-weight:700;
+}
+.wallet-item:hover{
+  background: rgba(69,227,106,.09);
+  border-color: rgba(69,227,106,.4);
+  transform: translateX(5px);
+}
+.wallet-item:hover span{ color: var(--green); }
+
+.modal-note{
+  margin-top:20px; padding-top:16px;
+  border-top:1px solid var(--line-soft);
+  font-size:.76rem; color: var(--muted-2); line-height:1.6;
+}
+
+/* ============================================================
    CTA / COMMUNITY
    ============================================================ */
 .cta-section{ padding-bottom: 100px; }
@@ -567,4 +678,555 @@ footer{
   padding: 44px 0 34px;
 }
 .foot-grid{
-  display:flex; justify-content:space-between; align-items:center; gap:26px; f
+  display:flex; justify-content:space-between; align-items:center; gap:26px; flex-wrap:wrap;
+}
+.foot-brand{ display:flex; align-items:center; gap:12px; }
+.foot-brand img{ width:38px; height:38px; border-radius:11px; border:1px solid var(--line); }
+.foot-brand b{ font-family: var(--font-display); font-size:.98rem; font-weight:800; }
+.foot-brand small{ display:block; font-size:.68rem; color:var(--muted-2); letter-spacing:.06em; }
+
+.foot-links{ display:flex; gap:20px; flex-wrap:wrap; }
+.foot-links a{
+  color: var(--muted); text-decoration:none; font-size:.86rem; transition:.2s;
+}
+.foot-links a:hover{ color: var(--green); }
+
+.foot-bottom{
+  margin-top: 30px; padding-top: 22px;
+  border-top: 1px solid var(--line-soft);
+  display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap;
+  font-size:.76rem; color: var(--muted-2);
+}
+
+/* ============================================================
+   TOAST
+   ============================================================ */
+.toast{
+  position: fixed; left:50%; bottom: 34px; transform: translate(-50%, 130%);
+  background: var(--panel-2);
+  border:1px solid rgba(69,227,106,.4);
+  color: var(--text);
+  padding: 14px 24px; border-radius: 14px;
+  font-size:.9rem; font-weight:600;
+  box-shadow: 0 20px 60px -14px rgba(0,0,0,.85), 0 0 40px -18px var(--green-glow);
+  z-index: 200; opacity:0;
+  transition: transform .4s cubic-bezier(.16,1,.3,1), opacity .4s;
+  max-width: calc(100% - 40px); text-align:center;
+}
+.toast.show{ transform: translate(-50%, 0); opacity:1; }
+
+/* ============================================================
+   REVEAL
+   ============================================================ */
+.reveal{ opacity:0; transform: translateY(28px); transition: opacity .75s ease, transform .75s cubic-bezier(.16,1,.3,1); }
+.reveal.in{ opacity:1; transform:none; }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 1080px){
+  .grid-4{ grid-template-columns: repeat(2, 1fr); }
+  .steps{ grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 900px){
+  .hero-grid{ grid-template-columns: 1fr; gap: 46px; }
+  .hero-visual{ order:-1; }
+  .logo-stage{ max-width: 290px; }
+  .hero{ padding-top: 48px; }
+  .anti-wrap{ grid-template-columns: 1fr; gap: 34px; }
+  .nav-links{ display:none; }
+}
+@media (max-width: 720px){
+  section{ padding: 70px 0; }
+  .steps{ grid-template-columns: repeat(2, 1fr); }
+  .hero-stats{ gap: 24px; }
+  .stat b{ font-size:1.25rem; }
+  .nav-cta .btn-ghost{ display:none; }
+  .ca-box{ flex-direction: column; align-items: stretch; }
+  .ca-box .btn{ width:100%; }
+  .ca-label{ padding-left:0; }
+}
+@media (max-width: 520px){
+  .grid-4{ grid-template-columns: 1fr; }
+  .steps{ grid-template-columns: 1fr; }
+  .brand-text small{ display:none; }
+  .hero h1{ letter-spacing:-.035em; }
+  .cta-buttons .btn{ width:100%; }
+}
+@media (prefers-reduced-motion: reduce){
+  *, *::before, *::after{ animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; }
+  html{ scroll-behavior:auto; }
+  .reveal{ opacity:1; transform:none; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- BACKGROUND -->
+<div class="bg-grid"></div>
+<div class="bg-glow glow-a"></div>
+<div class="bg-glow glow-b"></div>
+<div class="bg-glow glow-c"></div>
+<div class="grain"></div>
+
+<!-- TICKER -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <span>🐸 $GRADELESS</span>
+    <span>⏳ NOT LAUNCHED YET</span>
+    <span>🎓 NO DIPLOMA</span>
+    <span>🚫 NO PAID SHILLS</span>
+    <span>💙 COMMUNITY FIRST</span>
+    <span>📢 ORGANIC GROWTH</span>
+    <span>🐸 $GRADELESS</span>
+    <span>⏳ NOT LAUNCHED YET</span>
+    <span>🎓 NO DIPLOMA</span>
+    <span>🚫 NO PAID SHILLS</span>
+    <span>💙 COMMUNITY FIRST</span>
+    <span>📢 ORGANIC GROWTH</span>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="wrap nav">
+    <a href="#top" class="brand">
+      <img src="https://i.ibb.co/gLrY8mQV/IMG-20260911-234438-822.jpg" alt="$GRADELESS logo" />
+      <span class="brand-text">
+        <b>$GRADELESS</b>
+        <small>Community Token</small>
+      </span>
+    </a>
+
+    <nav class="nav-links">
+      <a href="#story">Story</a>
+      <a href="#build">We Build</a>
+      <a href="#howtobuy">How to Buy</a>
+      <a href="#community">Community</a>
+    </nav>
+
+    <div class="nav-cta">
+      <a class="btn btn-ghost" href="https://x.com/gradelessfrog" target="_blank" rel="noopener">𝕏 Follow</a>
+      <a class="btn btn-primary" href="https://t.me/gradelesscommunity" target="_blank" rel="noopener">Join Telegram</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="dot"></span> Not launched yet — building first</div>
+
+        <h1>
+          <span class="grad">$GRADELESS</span>
+          <span class="strike">Graduate</span>
+        </h1>
+
+        <p class="hero-lead">
+          A meme for every token that got <strong>left behind</strong> — and a community
+          that <strong>refuses to stay there.</strong>
+        </p>
+
+        <div class="hero-quote">
+          He wanted to graduate. 🎓 He waited. He watched. He believed.<br />
+          But he never got the diploma. 💀
+        </div>
+
+        <!-- CONTRACT ADDRESS -->
+        <div class="ca-box" id="ca">
+          <span class="ca-label">CA</span>
+          <span class="ca-value" id="caValue">Coming Soon…</span>
+          <button class="btn btn-ghost" id="caBtn" type="button">📋 Copy</button>
+        </div>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="https://t.me/gradelesscommunity" target="_blank" rel="noopener">🐸 Join the Community</a>
+          <a class="btn btn-blue" href="https://x.com/gradelessfrog" target="_blank" rel="noopener">𝕏 Follow on X</a>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat"><b>0</b><span>Paid Shills</span></div>
+          <div class="stat"><b>0</b><span>Fake Hype</span></div>
+          <div class="stat"><b>100%</b><span>Organic</span></div>
+          <div class="stat"><b>∞</b><span>Memes</span></div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="logo-stage">
+          <div class="logo-ring"></div>
+          <div class="logo-ring r2"></div>
+          <div class="logo-frame">
+            <img src="https://i.ibb.co/gLrY8mQV/IMG-20260911-234438-822.jpg" alt="$GRADELESS frog logo" />
+          </div>
+          <span class="float-emoji fe-1">🎓</span>
+          <span class="float-emoji fe-2">🐸</span>
+          <span class="float-emoji fe-3">💀</span>
+          <span class="float-emoji fe-4">❌</span>
+          <span class="float-emoji fe-5">💙</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ STORY ============ -->
+  <section class="story" id="story">
+    <div class="wrap">
+      <div class="story-card reveal">
+        <div class="eyebrow"><span class="dot"></span> The Story</div>
+
+        <div class="story-lines">
+          <p class="story-line">He wanted to graduate. <span class="em">🎓</span></p>
+          <p class="story-line">He waited. <span class="em">⏳</span></p>
+          <p class="story-line">He watched. <span class="em">👀</span></p>
+          <p class="story-line">He believed. <span class="em">💙</span></p>
+          <p class="story-line">But he never got the diploma. <span class="dead">💀</span></p>
+        </div>
+
+        <p class="story-punch">
+          That's <span class="grad">$GRADELESS.</span>
+        </p>
+        <p class="section-sub" style="margin-top:16px;">
+          A meme for every token that got left behind — and a community that refuses to stay there.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WE BUILD ============ -->
+  <section id="build">
+    <div class="wrap">
+      <div class="center reveal">
+        <div class="eyebrow"><span class="dot"></span> Until Launch</div>
+        <h2 class="section-title">We're not rushing it. <span class="accent">Until then, we build.</span></h2>
+        <p class="section-sub">
+          $GRADELESS is not launched yet. It launches when the time is right.
+          No countdown gimmicks — just real work, every single day.
+        </p>
+      </div>
+
+      <div class="grid-4">
+        <div class="pillar reveal">
+          <div class="pillar-icon">🐸</div>
+          <h3>Memes</h3>
+          <p>The frog didn't get a diploma, but he got jokes. Memes are the product — made by the community, for the community.</p>
+        </div>
+        <div class="pillar reveal">
+          <div class="pillar-icon">💙</div>
+          <h3>Community</h3>
+          <p>A home for everyone who got left behind. No gatekeeping, no elitism — just people who show up for each other.</p>
+        </div>
+        <div class="pillar reveal">
+          <div class="pillar-icon">📢</div>
+          <h3>Organic Growth</h3>
+          <p>Real people sharing real posts. Growth that compounds because it's earned, not bought.</p>
+        </div>
+        <div class="pillar reveal">
+          <div class="pillar-icon">🤝</div>
+          <h3>Real Support</h3>
+          <p>Answering questions, helping newcomers, showing up daily. Support that exists before the chart does.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ANTI-HYPE ============ -->
+  <section>
+    <div class="wrap anti-wrap">
+      <div class="reveal">
+        <div class="eyebrow"><span class="dot"></span> What We're Not</div>
+        <h2 class="section-title">No shortcuts. <span class="accent">No nonsense.</span></h2>
+        <p class="section-sub" style="margin-bottom:26px;">
+          The frog waited long enough for something real. We're not going to hand him the same
+          recycled playbook everyone else is running.
+        </p>
+
+        <div class="anti-list">
+          <div class="anti-item"><span class="x">❌</span> NO PAID SHILLS</div>
+          <div class="anti-item"><span class="x">❌</span> NO FAKE HYPE</div>
+          <div class="anti-item"><span class="x">❌</span> NO FORCED PROMOTION</div>
+          <div class="anti-item"><span class="x">❌</span> NO EMPTY PROMISES</div>
+        </div>
+      </div>
+
+      <div class="anti-panel reveal">
+        <span class="big">🐸🎓❌</span>
+        <h3>The frog didn't get his diploma.</h3>
+        <p>So let's build him a community instead.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HOW TO BUY ============ -->
+  <section id="howtobuy">
+    <div class="wrap">
+      <div class="center reveal">
+        <div class="eyebrow"><span class="dot"></span> How to Buy</div>
+        <h2 class="section-title">Get ready <span class="accent">before the bell rings.</span></h2>
+        <p class="section-sub">
+          $GRADELESS hasn't launched yet. Here's exactly what to do now so you're ready
+          the moment the contract goes live.
+        </p>
+      </div>
+
+      <div class="steps">
+        <button type="button" class="step reveal" data-step="wallet">
+          <span class="step-num">1</span>
+          <span class="step-title">Get a Wallet</span>
+          <span class="step-text">Download a self-custody wallet. Keep your seed phrase offline, written down, and never shared with anyone.</span>
+          <span class="tag">Do this now</span>
+          <span class="step-cta">Choose wallet <span class="arrow">→</span></span>
+        </button>
+
+        <button type="button" class="step reveal" data-step="fund">
+          <span class="step-num">2</span>
+          <span class="step-title">Fund Your Wallet</span>
+          <span class="step-text">Load up with the native coin of the chain we launch on, plus a little extra for gas fees.</span>
+          <span class="tag">Do this now</span>
+          <span class="step-cta">Funding tips <span class="arrow">→</span></span>
+        </button>
+
+        <button type="button" class="step reveal" data-step="ca">
+          <span class="step-num">3</span>
+          <span class="step-title">Wait for the CA</span>
+          <span class="step-text">The contract address drops right here on this site and in our Telegram + X. Only trust links from official channels.</span>
+          <span class="tag wait">Coming soon</span>
+          <span class="step-cta wait">Not live yet <span class="arrow">→</span></span>
+        </button>
+
+        <button type="button" class="step reveal" data-step="swap">
+          <span class="step-num">4</span>
+          <span class="step-title">Swap for $GRADELESS</span>
+          <span class="step-text">Paste the official CA into your swap of choice, set your slippage, and swap. Always double-check the address.</span>
+          <span class="tag wait">At launch</span>
+          <span class="step-cta wait">Opens at launch <span class="arrow">→</span></span>
+        </button>
+
+        <button type="button" class="step reveal" data-step="community">
+          <span class="step-num">5</span>
+          <span class="step-title">Join &amp; Hold</span>
+          <span class="step-text">Hop into the Telegram, grab your seat, and help build the community. Early is a mindset, not a timestamp.</span>
+          <span class="tag">Always</span>
+          <span class="step-cta">Open Telegram <span class="arrow">→</span></span>
+        </button>
+      </div>
+
+      <div class="buy-note reveal">
+        ⏳ <span><b>$GRADELESS IS NOT LAUNCHED YET.</b> No presale. No stealth drop. The CA will be posted publicly when the time is right — nowhere else.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ COMMUNITY CTA ============ -->
+  <section class="cta-section" id="community">
+    <div class="wrap">
+      <div class="cta-card reveal">
+        <span class="cta-frog">🐸</span>
+        <h2>If you're here early, <span class="grad">you're part of the story.</span></h2>
+        <p>
+          Share the meme. Invite your friends. Help build <strong>GRADELESS</strong> before launch.
+          The frog didn't get his diploma — so let's build him a community.
+        </p>
+
+        <div class="cta-buttons">
+          <a class="btn btn-primary" href="https://t.me/gradelesscommunity" target="_blank" rel="noopener">💬 Join the Telegram</a>
+          <a class="btn btn-blue" href="https://x.com/gradelessfrog" target="_blank" rel="noopener">𝕏 Follow on X</a>
+          <button class="btn btn-ghost" id="shareBtn" type="button">🔗 Share the Meme</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <img src="https://i.ibb.co/gLrY8mQV/IMG-20260911-234438-822.jpg" alt="$GRADELESS logo" />
+        <div>
+          <b>$GRADELESS</b>
+          <small>The frog didn't get his diploma. 🐸🎓❌</small>
+        </div>
+      </div>
+
+      <nav class="foot-links">
+        <a href="#story">Story</a>
+        <a href="#build">We Build</a>
+        <a href="#howtobuy">How to Buy</a>
+        <a href="https://t.me/gradelesscommunity" target="_blank" rel="noopener">Telegram</a>
+        <a href="https://x.com/gradelessfrog" target="_blank" rel="noopener">X</a>
+      </nav>
+    </div>
+
+    <div class="foot-bottom">
+      <span>© <span id="year"></span> $GRADELESS. Community-driven. Not launched yet.</span>
+      <span>$GRADELESS is a meme coin with no intrinsic value or expectation of financial return. DYOR. 🐸</span>
+    </div>
+  </div>
+</footer>
+
+<!-- WALLET MODAL -->
+<div class="modal-overlay" id="walletModal" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="walletModalTitle">
+    <button class="modal-close" id="modalClose" type="button" aria-label="Close">✕</button>
+    <h3 id="walletModalTitle">Pick a Wallet 🐸</h3>
+    <p>You'll need a self-custody wallet before $GRADELESS launches. Set one up now so you're ready.</p>
+
+    <div class="wallet-list">
+      <a class="wallet-item" href="https://metamask.io/download/" target="_blank" rel="noopener">
+        🦊 MetaMask <span>EVM chains</span>
+      </a>
+      <a class="wallet-item" href="https://phantom.app/" target="_blank" rel="noopener">
+        👻 Phantom <span>Solana + EVM</span>
+      </a>
+      <a class="wallet-item" href="https://trustwallet.com/download" target="_blank" rel="noopener">
+        🛡️ Trust Wallet <span>Multi-chain</span>
+      </a>
+    </div>
+
+    <p class="modal-note">🔒 Never share your seed phrase. Nobody from $GRADELESS will ever ask for it.</p>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ---------- Year ---------- */
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  /* ---------- Toast ---------- */
+  const toastEl = document.getElementById('toast');
+  let toastTimer;
+  function showToast(msg, ms) {
+    toastEl.textContent = msg;
+    toastEl.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toastEl.classList.remove('show'), ms || 2800);
+  }
+
+  /* ---------- Step cards ---------- */
+  const walletModal = document.getElementById('walletModal');
+  const modalClose  = document.getElementById('modalClose');
+  let lastFocused = null;
+
+  function openWalletModal(){
+    lastFocused = document.activeElement;
+    walletModal.classList.add('open');
+    walletModal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    modalClose.focus();
+  }
+
+  function closeWalletModal(){
+    walletModal.classList.remove('open');
+    walletModal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    if (lastFocused) lastFocused.focus();
+  }
+
+  modalClose.addEventListener('click', closeWalletModal);
+  walletModal.addEventListener('click', (e) => {
+    if (e.target === walletModal) closeWalletModal();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && walletModal.classList.contains('open')) closeWalletModal();
+  });
+
+  document.querySelectorAll('.step').forEach((step) => {
+    step.addEventListener('click', () => {
+      const action = step.dataset.step;
+
+      if (action === 'wallet') {
+        openWalletModal();
+      } else if (action === 'fund') {
+        showToast('💡 Buy the native coin on an exchange, then send it to your wallet. Keep extra for gas.');
+      } else if (action === 'ca') {
+        document.getElementById('ca').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        showToast('⏳ The CA isn\'t live yet — it drops here first. 🐸');
+      } else if (action === 'swap') {
+        showToast('🔄 Swapping opens the moment $GRADELESS launches.');
+      } else if (action === 'community') {
+        window.open('https://t.me/gradelesscommunity', '_blank', 'noopener');
+      }
+    });
+  });
+
+  /* ---------- Copy CA (coming soon) ---------- */
+  const CA = 'COMING SOON';
+  const caBtn = document.getElementById('caBtn');
+  caBtn.addEventListener('click', async () => {
+    if (CA === 'COMING SOON') {
+      showToast('⏳ The CA isn\'t live yet — the frog is still waiting. 🐸');
+      return;
+    }
+    try {
+      await navigator.clipboard.writeText(CA);
+      showToast('✅ Contract address copied!');
+    } catch (e) {
+      showToast('📋 CA: ' + CA);
+    }
+  });
+
+  /* ---------- Share ---------- */
+  const shareBtn = document.getElementById('shareBtn');
+  shareBtn.addEventListener('click', async () => {
+    const shareData = {
+      title: '$GRADELESS',
+      text: 'The frog didn\'t get his diploma. 🐸🎓❌ A meme for every token that got left behind — and a community that refuses to stay there.',
+      url: window.location.href
+    };
+    if (navigator.share) {
+      try { await navigator.share(shareData); return; } catch (e) { /* cancelled */ }
+    }
+    try {
+      await navigator.clipboard.writeText(shareData.text + ' ' + shareData.url);
+      showToast('🔗 Copied — go share the meme!');
+    } catch (e) {
+      showToast('🔗 Copy the link and share the meme!');
+    }
+  });
+
+  /* ---------- Scroll reveal ---------- */
+  const reveals = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('in'), i * 80);
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+    reveals.forEach(el => io.observe(el));
+  } else {
+    reveals.forEach(el => el.classList.add('in'));
+  }
+
+  /* ---------- Smooth anchor offset for sticky header ---------- */
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      const id = link.getAttribute('href');
+      if (id === '#' || id.length < 2) return;
+      const target = document.querySelector(id);
+      if (!target) return;
+      e.preventDefault();
+      const top = target.getBoundingClientRect().top + window.pageYOffset - 84;
+      window.scrollTo({ top, behavior: 'smooth' });
+    });
+  });
+
+})();
+</script>
+
+</body>
+</html>
